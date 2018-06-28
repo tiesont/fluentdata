@@ -1,0 +1,678 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="./favicon.ico" />
+
+    <title>FluentData Docs</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="./css/dashboard.css" rel="stylesheet" />
+
+    <link href="./css/google.prettify.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="./js/prettify.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 navbar-expand-sm">
+        <a class="navbar-brand col-sm-3 col-md-2" href="./index.html">FluentData</a>
+        <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="navbar-nav">
+                <li class="nav-item active text-nowrap">
+                    <a class="nav-link" href="./index.html">Docs</a>
+                </li>
+                <li class="nav-item text-nowrap">
+                    <a class="nav-link" href="./fluency.html">Fluency Extension</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <a href="#GettingStarted">Getting started</a>
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="#Requirements">Requirements</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#SupportedDatabases">Supported databases</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#Installation">Installation</a></li>
+                    </ul>
+
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <a href="#CoreConcepts">Core concepts</a>
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="#DbContext">DbContext</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#DbCommand">DbCommand</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#Events">Events</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#Builders">Builders</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#Mapping">Mapping</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#Dispose">When should you dispose&#63;</a></li>
+                    </ul>
+
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <a href="#CodeSamples">Code samples</a>
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="#InitDbContext">Create and initialize a DbContext</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#Query">Query for a list of items</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#QuerySingle">Query for a single item</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#QueryValue">Query for a scalar value</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#QueryValues">Query for a list of scalar values</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#Parameters">Parameters</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#CodeSamplesMapping">Mapping</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#MultiResultSets">Multiple result sets</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#SelectData">Select data &#38; Paging</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#InsertData">Insert data</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#UpdateData">Update data</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#DeleteData">Delete data</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#StoredProcedures">Stored procedures</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#Transactions">Transactions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#EntityFactory">Entity factory</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <h1>FluentData</h1>
+                <p class="lead">
+                    FluentData - a micro-ORM with a fluent API that makes it simple to query a database.
+                </p>
+                <p>
+                    A simple to use micro-ORM with a great fluent API that makes it simple to select, insert, update and delete data in a database. Supported databases: Microsoft SQL Server, MS SQL Server Compact, MS SQL Azure, Oracle and MySQL.
+                </p>
+                <hr />
+
+                <h2 id="GettingStarted">Getting started</h2>
+
+                <h4 id="Requirements">Requirements</h4>
+                <ul><li>.NET 4.0.</li></ul>
+
+                <h4 id="SupportedDatabases">Supported databases</h4>
+                <ul>
+                    <li>MS SQL Server using the native .NET driver. </li>
+                    <li>MS SQL Azure using the native .NET driver.</li>
+                    <li>MS Access using the native .NET driver.</li>
+                    <li>MS SQL Server Compact 4.0 through the <a href="http://www.microsoft.com/download/en/details.aspx?id=17876">Microsoft SQL Server Compact 4.0 driver</a>.</li>
+                    <li>Oracle through the <a href="http://www.oracle.com/technetwork/topics/dotnet/index-085163.html">ODP.NET driver</a>.</li>
+                    <li>MySQL through the <a href="http://www.mysql.com/downloads/connector/net/">MySQL Connector .NET driver</a>. </li>
+                    <li>SQLite through the <a href="http://system.data.sqlite.org/">SQLite ADO.NET Data Provider</a>.</li>
+                    <li>PostgreSql through the <a href="http://pgfoundry.org/projects/npgsql/">Npgsql</a> provider.</li>
+                    <li>IBM DB2</li>
+                    <li>Sybase through the <a href="https://github.com/FredoKapo/FLUENT-ORM-ASE-PROVIDER">https://github.com/FredoKapo/FLUENT-ORM-ASE-PROVIDER</a> provider.</li>
+                </ul>
+
+                <h4 id="Installation">Installation</h4>
+                <p>
+                    If you are using <a href="https://www.nuget.org/packages/FluentData/">NuGet</a>:
+                </p>
+                <pre class="prettyprint linenums"><code>PM > Install-Package FluentData</code></pre>
+                <p>
+                    If you are not using NuGet:
+                </p>
+                <ol>
+                    <li>Download the zip with the binary files.</li>
+                    <li>Extract it, and copy the files to your solution or project folder.</li>
+                    <li>Add a project reference to FluentData.dll.</li>
+                </ol>
+
+                <h2 id="CoreConcepts">Core concepts</h2>
+
+                <h5 id="DbContext">DbContext</h5>
+                <p>
+                    This class is the starting point for working with FluentData. It has properties for defining configurations such as the
+                    connection string to the database, and operations for querying the database.
+                </p>
+
+                <h5 id="DbCommand">DbCommand</h5>
+                <p>This is the class that is responsible for performing the actual query against the database.</p>
+
+                <h5 id="Events">Events</h5>
+                <p>The DbContext class has support for the following events:</p>
+                <ul>
+                    <li>OnConnectionClosed</li>
+                    <li>OnConnectionOpened</li>
+                    <li>OnConnectionOpening</li>
+                    <li>OnError</li>
+                    <li>OnExecuted</li>
+                    <li>OnExecuting</li>
+                </ul>
+                <p>By using any of these then you can for instance write to the log if an error has occurred or when a query has been executed.</p>
+
+                <h5 id="Builders">Builders</h5>
+                <p>A builder provides a nice fluent API for generating SQL for insert, update and delete queries.</p>
+
+                <h5 id="Mapping">Mapping</h5>
+                <p>
+                    FluentData can automap the result from a SQL query to either a dynamic type (new in .NET 4.0) or to your own .NET entity type
+                    (POCO - Plain Old CLR Object) by using the following convention:
+                </p>
+
+                <h6>Automap to an entity type:</h6>
+                <ol>
+                    <li>
+                        If the field name does not contain an underscore ("_") then it will try to try to automap to a property with the same name.
+                        For instance a field named "Name" would be automapped to a property also named "Name".
+                    </li>
+                    <li>
+                        If a field name does contain an underscore ("_") then it will try to map to a nested property. For instance a field
+                        named "Category_Name" would be automapped to the property "Category.Name".
+                    </li>
+                </ol>
+                <p>
+                    If there is a mismatch between the fields in the database and in the entity type then the alias keyword in SQL
+                    can be used or you can create your own mapping method. Check the mapping section below for code samples.
+                </p>
+
+                <h6>Automap to a dynamic type:</h6>
+                <p>
+                    For dynamic types every field will be automapped to a property with the same name. For instance the field name Name
+                    would be automapped to the Name property.
+                </p>
+
+                <h5 id="Dispose">When should you dispose?</h5>
+                <ul>
+                    <li>DbContext must be disposed if you have enabled UseTransaction or UseSharedConnection.</li>
+                    <li>DbCommand must be disposed if you have enabled UseMultiResult (or MultiResultSql).</li>
+                    <li>StoredProcedureBuilder must be disposed if you have enabled UseMultiResult.</li>
+                </ul>
+                <p>
+                    In all the other cases dispose will be handled automatically by FluentData. This means that a database connection is opened just
+                    before a query is executed and closed just after the execution has been completed.
+                </p>
+
+                <h2 id="CodeSamples">Code samples</h2>
+
+                <h4 id="InitDbContext">Create and initialize a DbContext</h4>
+                <p>
+                    The connection string on the DbContext class can be initialized either by giving the connection string name in
+                    the *.config file or by sending in the entire connection string.
+                </p>
+
+                <h5>Important configurations</h5>
+
+                <h6><code>IgnoreIfAutoMapFails</code></h6>
+                <p>
+                    Calling this prevents automapper from throwing an exception if a column cannot be mapped
+                    to a corresponding property due to a name mismatch.
+                </p>
+
+                <h5>Create and initialize a DbContext</h5>
+                <p>The DbContext can be initialized by either calling ConnectionStringName which will read the connection string from the *.config file:</p>
+                <div>
+                    <pre class="prettyprint linenums"><code>public IDbContext Context()
+{
+    return new DbContext().ConnectionStringName("MyDatabase", new SqlServerProvider());
+}
+</code></pre>
+                </div>
+
+                <p>or by calling the ConnectionString method to set the connection string explicitly:</p>
+
+                <div>
+                    <pre class="prettyprint linenums"><code>public IDbContext Context()
+{
+    return new DbContext().ConnectionString("Server=MyServerAddress;Database=MyDatabase;Trusted_Connection=True;", new SqlServerProvider());
+}
+</code></pre>
+                </div>
+
+                <h5>Providers</h5>
+                <p>If you want to work against another database than SqlServer then simply replace the SqlServerProvider in the sample code above with any of the following:</p>
+                <ul>
+                    <li>AccessProvider</li>
+                    <li>DB2Provider</li>
+                    <li>OracleProvider</li>
+                    <li>MySqlProvider</li>
+                    <li>PostgreSqlProvider</li>
+                    <li>SqliteProvider</li>
+                    <li>SqlServerCompact</li>
+                    <li>SqlAzureProvider</li>
+                    <li>SqlServerProvider</li>
+                </ul>
+
+                <h5 id="Query">Query for a list of items</h5>
+                <h6>Return a list of dynamic objects (new in .NET 4.0):</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>List&lt;dynamic&gt; products = Context.Sql("select * from Product").QueryMany&lt;dynamic&gt;();</code></pre>
+                </div>
+
+                <h6>Return a list of strongly typed objects:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>List&lt;Product&gt; products = Context.Sql("select * from Product").QueryMany&lt;Product&gt;();</code></pre>
+                </div>
+
+                <h6>Return a list of strongly typed objects in a custom collection:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>ProductionCollection products = Context.Sql("select * from Product").QueryMany&lt;Product, ProductionCollection&gt;();</code></pre>
+                </div>
+
+                <h6>Return a DataTable:</h6>
+                <p>See <a href="#QuerySingle">Query for a single item</a>.</p>
+
+                <h5 id="QuerySingle">Query for a single item</h5>
+                <p>Return as a dynamic object:</p>
+                <div>
+                    <pre class="prettyprint linenums"><code>dynamic product = Context.Sql(@"select * from Product
+    where ProductId = 1").QuerySingle&lt;dynamic&gt;();
+</code></pre>
+                </div>
+
+                <h6>Return as a strongly typed object:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>Product product = Context.Sql(@"select * from Product
+    where ProductId = 1").QuerySingle&lt;Product&gt;();
+</code></pre>
+                </div>
+
+                <h6>Return as a DataTable:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>DataTable products = Context.Sql("select * from Product").QuerySingle&lt;DataTable&gt;();</code></pre>
+                </div>
+
+                <p>
+                    Both QueryMany&lt;DataTable&gt; and QuerySingle&lt;DataTable&gt; can be called to return a DataTable, but since QueryMany returns a
+                    List&lt;DataTable&gt; then it&#39;s more convenient to call QuerySingle which returns just DataTable. Even though the method is called
+                    QuerySingle, multiple rows will still be returned as part of the DataTable.
+                </p>
+
+                <h5 id="QueryValue">Query for a scalar value</h5>
+                <div>
+                    <pre class="prettyprint linenums"><code>int numberOfProducts = Context.Sql(@"select count(*)
+    from Product").QuerySingle&lt;int&gt;();
+</code></pre>
+                </div>
+
+                <h5 id="QueryValues">Query for a list of scalar values</h5>
+                <div>
+                    <pre class="prettyprint linenums"><code>List&lt;int&gt; productIds = Context.Sql(@"select ProductId
+    from Product").QueryMany&lt;int&gt;();
+</code></pre>
+                </div>
+
+                <h5 id="Parameters">Parameters</h5>
+
+                <h6>Indexed parameters:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>dynamic products = Context.Sql(@"select * from Product
+    where ProductId = @0 or ProductId = @1", 1, 2).QueryMany&lt;dynamic&gt;();
+</code></pre>
+                </div>
+
+                <p>or:</p>
+
+                <div>
+                    <pre class="prettyprint linenums"><code>dynamic products = Context.Sql(@"select * from Product
+    where ProductId = @0 or ProductId = @1")
+    .Parameters(1, 2).QueryMany&lt;dynamic&gt;();
+</code></pre>
+                </div>
+
+                <h6>Named parameters:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>dynamic products = Context.Sql(@"select * from Product
+    where ProductId = @ProductId1 or ProductId = @ProductId2")
+    .Parameter("ProductId1", 1)
+    .Parameter("ProductId2", 2)
+    .QueryMany&lt;dynamic&gt;();
+</code></pre>
+                </div>
+
+                <h6>Output parameter:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>var command = Context.Sql(@"select @ProductName = Name from Product
+    where ProductId=1")
+    .ParameterOut("ProductName", DataTypes.String, 100);
+command.Execute();
+
+string productName = command.ParameterValue&lt;string&gt;("ProductName");
+</code></pre>
+                </div>
+
+                <h6>List of parameters - <code>in</code> operator:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>List&lt;int&gt; ids = new List&lt;int&gt;() { 1, 2, 3, 4 };
+//be careful here; don&#39;t leave any whitespace around in(...) syntax.
+dynamic products = Context.Sql(@"select * from Product
+    where ProductId in(@0)", ids).QueryMany&lt;dynamic&gt;();
+</code></pre>
+                </div>
+
+                <h6><code>like</code> operator:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>string cens = "%abc%";
+Context.Sql("select * from Product where ProductName like @0",cens);
+</code></pre>
+                </div>
+
+                <h5 id="CodeSamplesMapping">Mapping</h5>
+
+                <h6>Automapping - 1:1 match between the database and the .NET object:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>List&lt;Product&gt; products = Context.Sql(@"select *
+    from Product")
+    .QueryMany&lt;Product&gt;();
+</code></pre>
+                </div>
+
+                <h6>Automap to a custom collection:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>ProductionCollection products = Context.Sql("select * from Product").QueryMany&lt;Product, ProductionCollection&gt;();</code></pre>
+                </div>
+
+                <h6>Automapping - Mismatch between the database and the .NET object, use the alias keyword in SQL:</h6>
+
+                <h6>Weakly typed:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>List&lt;Product&gt; products = Context.Sql(@"select p.*,
+    c.CategoryId as Category_CategoryId,
+    c.Name as Category_Name
+    from Product p
+    inner join Category c on p.CategoryId = c.CategoryId")
+    .QueryMany&lt;Product&gt;();
+</code></pre>
+                </div>
+                <p>
+                    Here the p.* which is ProductId and Name would be automapped to the properties Product.Name and Product.ProductId,
+                    and Category_CategoryId and Category_Name would be automapped to Product.Category.CategoryId and Product.Category.Name.
+                </p>
+
+                <h6>Custom mapping using dynamic:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>List&lt;Product&gt; products = Context.Sql(@"select * from Product")
+    .QueryMany&lt;Product&gt;(Custom_mapper_using_dynamic);
+
+public void Custom_mapper_using_dynamic(Product product, dynamic row)
+{
+    product.ProductId = row.ProductId;
+    product.Name = row.Name;
+}
+</code></pre>
+                </div>
+
+                <h6>Custom mapping using a datareader:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>List&lt;Product&gt; products = Context.Sql(@"select * from Product")
+    .QueryMany&lt;Product&gt;(Custom_mapper_using_datareader);
+
+public void Custom_mapper_using_datareader(Product product, IDataReader row)
+{
+    product.ProductId = row.GetInt32("ProductId");
+    product.Name = row.GetString("Name");
+}
+</code></pre>
+                </div>
+
+                <p>Or if you have a complex entity type where you need to control how it is created then the QueryComplexMany/QueryComplexSingle can be used:</p>
+                <div>
+                    <pre class="prettyprint linenums"><code>var products = new List&lt;Product&gt;();
+Context.Sql("select * from Product").QueryComplexMany&lt;Product&gt;(products, MapComplexProduct);
+
+private void MapComplexProduct(IList&lt;Product&gt; products, IDataReader reader)
+{
+    var product = new Product();
+    product.ProductId = reader.GetInt32("ProductId");
+    product.Name = reader.GetString("Name");
+    products.Add(product);
+}
+</code></pre>
+                </div>
+
+                <h5 id="MultiResultSets">Multiple result sets</h5>
+                <p>
+                    FluentData supports multiple resultsets. This allows you to do multiple queries in a single database call. When this
+                    feature is used it&#39;s important to wrap the code inside a using statement as shown below in order to make sure that
+                    the database connection is closed.
+                </p>
+                <div>
+                    <pre class="prettyprint linenums"><code>using (var command = Context.MultiResultSql)
+{
+    List&lt;Category&gt; categories = command.Sql(
+                    @"select * from Category;
+    select * from Product;").QueryMany&lt;Category&gt;();
+
+    List&lt;Product&gt; products = command.QueryMany&lt;Product&gt;();
+}
+</code></pre>
+                </div>
+
+                <p>
+                    The first time the Query method is called it does a single query against the database. The second time the Query
+                    is called, FluentData already knows that it&#39;s running in a multiple result set mode, so it reuses the data
+                    retrieved from the first query.
+                </p>
+
+                <h5 id="SelectData">Select data and Paging</h5>
+
+                <p>A select builder exists to make selecting data and paging easy:</p>
+                <div>
+                    <pre class="prettyprint linenums"><code>List&lt;Product&gt; products = Context.Select&lt;Product&gt;("p.*, c.Name as Category_Name")
+    .From(@"Product p inner join Category c on c.CategoryId = p.CategoryId")
+    .Where("p.ProductId &gt; 0 and p.Name is not null")
+    .OrderBy("p.Name")
+    .Paging(1, 10).QueryMany();
+</code></pre>
+                </div>
+                <p>By calling Paging(1, 10) then the first 10 products will be returned.</p>
+
+                <h5 id="InsertData">Insert data</h5>
+                <h6>Using SQL:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>int productId = Context.Sql(@"insert into Product(Name, CategoryId) values(@0, @1);")
+    .Parameters("The Warren Buffet Way", 1)
+    .ExecuteReturnLastId&lt;int&gt;();
+</code></pre>
+                </div>
+
+                <h6>Using a builder:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>int productId = Context.Insert("Product")
+    .Column("Name", "The Warren Buffet Way")
+    .Column("CategoryId", 1)
+    .ExecuteReturnLastId&lt;int&gt;();
+</code></pre>
+                </div>
+
+                <h6>Using a builder with automapping:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>Product product = new Product();
+product.Name = "The Warren Buffet Way";
+product.CategoryId = 1;
+
+product.ProductId = Context.Insert&lt;Product&gt;("Product", product)
+    .AutoMap(x =&gt; x.ProductId)
+    .ExecuteReturnLastId&lt;int&gt;();
+</code></pre>
+                </div>
+                <p>
+                    We send in ProductId to the AutoMap method to get AutoMap to ignore and not map the ProductId since
+                    this property is an identity field where the value is generated in the database.
+                </p>
+
+                <h5 id="UpdateData">Update data</h5>
+                <h6>Using SQL:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>int rowsAffected = Context.Sql(@"update Product set Name = @0
+    where ProductId = @1")
+    .Parameters("The Warren Buffet Way", 1)
+    .Execute();
+</code></pre>
+                </div>
+
+                <h6>Using a builder:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>int rowsAffected = Context.Update("Product")
+    .Column("Name", "The Warren Buffet Way")
+    .Where("ProductId", 1)
+    .Execute();
+</code></pre>
+                </div>
+
+                <h6>Using a builder with automapping:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>Product product = Context.Sql(@"select * from Product
+    where ProductId = 1")
+    .QuerySingle&lt;Product&gt;();
+product.Name = "The Warren Buffet Way";
+
+int rowsAffected = Context.Update&lt;Product&gt;("Product", product)
+    .AutoMap(x =&gt; x.ProductId)
+    .Where(x =&gt; x.ProductId)
+    .Execute();
+</code></pre>
+                </div>
+                <p>
+                    We send in ProductId to the AutoMap method to get AutoMap to ignore and not map the ProductId since
+                    this is the identity field that should not get updated.
+                </p>
+
+                <h5>IgnoreIfAutoMapFails</h5>
+                <p>
+                    When reading from the database, if some data columns are not mapped to an entity class, FluentData will (by default) throw an exception. If you want ignore the exception,
+                    or if the property is not used for map data table, then you can use the <code>IgnoreIfAutoMapFails(true);</code> option; this will ignore the exception.
+                </p>
+
+                <div>
+                    <pre class="prettyprint linenums"><code>context.IgnoreIfAutoMapFails(true);</code></pre>
+                </div>
+
+                <h6>Insert and update  - common Fill method</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>var product = new Product();
+product.Name = "The Warren Buffet Way";
+product.CategoryId = 1;
+
+var insertBuilder = Context.Insert&lt;Product&gt;("Product", product).Fill(FillBuilder);
+
+var updateBuilder = Context.Update&lt;Product&gt;("Product", product).Fill(FillBuilder);
+
+public void FillBuilder(IInsertUpdateBuilder&lt;Product&gt; builder)
+{
+    builder.Column(x =&gt; x.Name);
+    builder.Column(x =&gt; x.CategoryId);
+}
+</code></pre>
+                </div>
+
+                <h5 id="DeleteData">Delete data</h5>
+
+                <h6>Using SQL:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>int rowsAffected = Context.Sql(@"delete from Product
+    where ProductId = 1")
+    .Execute();
+</code></pre>
+                </div>
+
+                <h6>Using a builder:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>int rowsAffected = Context.Delete("Product")
+    .Where("ProductId", 1)
+    .Execute();
+</code></pre>
+                </div>
+
+                <h5 id="StoredProcedures">Stored procedure</h5>
+                <p>Using SQL:</p>
+                <div>
+                    <pre class="prettyprint linenums"><code>var rowsAffected = Context.Sql("ProductUpdate")
+    .CommandType(DbCommandTypes.StoredProcedure)
+    .Parameter("ProductId", 1)
+    .Parameter("Name", "The Warren Buffet Way")
+    .Execute();
+</code></pre>
+                </div>
+
+                <h6>Using a builder:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>var rowsAffected = Context.StoredProcedure("ProductUpdate")
+    .Parameter("Name", "The Warren Buffet Way")
+    .Parameter("ProductId", 1).Execute();
+</code></pre>
+                </div>
+
+                <h6>Using a builder with automapping:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>var product = Context.Sql("select * from Product where ProductId = 1")
+    .QuerySingle&lt;Product&gt;();
+
+product.Name = "The Warren Buffet Way";
+
+var rowsAffected = Context.StoredProcedure&lt;Product&gt;("ProductUpdate", product)
+    .AutoMap(x =&gt; x.CategoryId).Execute();
+</code></pre>
+                </div>
+
+                <h6>Using a builder with automapping and expressions:</h6>
+                <div>
+                    <pre class="prettyprint linenums"><code>var product = Context.Sql("select * from Product where ProductId = 1")
+    .QuerySingle&lt;Product&gt;();
+product.Name = "The Warren Buffet Way";
+
+var rowsAffected = Context.StoredProcedure&lt;Product&gt;("ProductUpdate", product)
+    .Parameter(x =&gt; x.ProductId)
+    .Parameter(x =&gt; x.Name).Execute();
+</code></pre>
+                </div>
+
+                <h5 id="Transactions">Transactions</h5>
+                <p>
+                    FluentData supports transactions. When you use transactions its important to wrap the code inside a using statement to make
+                    sure that the database connection is closed. By default, if any exception occur or if Commit is not called then Rollback will
+                    automatically be called.
+                </p>
+                <div>
+                    <pre class="prettyprint linenums"><code>using (var context = Context.UseTransaction(true))
+{
+    context.Sql("update Product set Name = @0 where ProductId = @1")
+        .Parameters("The Warren Buffet Way", 1)
+        .Execute();
+
+    context.Sql("update Product set Name = @0 where ProductId = @1")
+        .Parameters("Bill Gates Bio", 2)
+        .Execute();
+
+    context.Commit();
+}
+</code></pre>
+                </div>
+
+                <h5 id="EntityFactory">Entity factory</h5>
+                <p>
+                    The entity factory is responsible for creating object instances during automapping. If you have some complex business objects that
+                    require special actions during creation, you can create your own custom entity factory:
+                </p>
+                <div>
+                    <pre class="prettyprint linenums"><code>List&lt;Product&gt; products = Context.EntityFactory(new CustomEntityFactory())
+    .Sql("select * from Product")
+    .QueryMany&lt;Product&gt;();
+
+public class CustomEntityFactory : IEntityFactory
+{
+    public virtual object Resolve(Type type)
+    {
+         return Activator.CreateInstance(type);
+    }
+}
+</code></pre>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            window.prettyPrint && prettyPrint();
+        })
+    </script>
+</body>
+</html>

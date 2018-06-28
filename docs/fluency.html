@@ -1,0 +1,361 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="./favicon.ico" />
+
+    <title>Fluency - T4 Extension for the FluentData ORM. </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="./css/dashboard.css" rel="stylesheet" />
+
+    <link href="./css/google.prettify.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="./js/prettify.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 navbar-expand-sm">
+        <a class="navbar-brand col-sm-3 col-md-2" href="./index.html">FluentData</a>
+        <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="navbar-nav">
+                <li class="nav-item text-nowrap">
+                    <a class="nav-link" href="./index.html">Docs</a>
+                </li>
+                <li class="nav-item active text-nowrap">
+                    <a class="nav-link" href="./fluency.html">Fluency Extension</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <a href="#GettingStarted">Getting started</a>
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="#Requirements">Requirements</a></li>
+                    </ul>
+
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <a href="#CoreConcepts">Use</a>
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="#using-fluency-t4">How to use Fluency templates?</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#adding-external-tool">Adding new external tool</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#understanding-generated-code">Understanding the generated code</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#using-generated-code">Using the generated files</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <h1>FluentData</h1>
+                <p class="lead">
+                    Fluency - T4 Extension for the FluentData ORM.
+                </p>
+                <hr />
+                <p id="GettingStarted">
+                    This contribution is an attempt to speedup the development of domain layer in bottom to top model with FluentData. This means
+                    you already have the Database created and you need a quick way to write the Entity wrapers and common CURD operations. The goal
+                    of fluency is to provide T4 templates to generate a domain layer which has very minimal learning curve and very simple to use.
+                    At the moment Fluency supports the <a href="http://martinfowler.com/eaaCatalog/tableDataGateway.html">Table Data Gateway</a>
+                    pattern which is very simple to understand and use.
+                </p>
+
+                <h2 id="Requirements">
+                    Requirements
+                </h2>
+                <ul>
+                    <li>Visual Studio 2013 or newer</li>
+                    <li>FluentData</li>
+                </ul>
+
+                <a name="CoreConcepts"></a>
+                <h2 id="using-fluency-t4">How to use Fluency Templates?</h2>
+                <p>
+                    The recommended way to use Fluency Template is by using <b>TextTransform.exe</b> tool. This is a command-line tool that you can
+                    use to transform a text template. When you call TextTransform.exe, you specify the name of a text template file as an argument.
+                    TextTransform.exe calls the text transformation engine and processes the text template. This tool accepts optional parameters in
+                    case your template requires some parameters which is the case with the template you will be using. <b>TextTransform.exe</b> is
+                    located in the following directory:
+                </p>
+                <p>
+                    <i>\Program Files\Common Files\Microsoft Shared\TextTemplating\10.0 </i>
+                </p>
+                <p>
+                    or
+                </p>
+                <p>
+                    <i>\Program Files\Common Files\Microsoft Shared\TextTemplating\11.0 </i>
+                </p>
+                <p>
+                    depending upon which version of Visual Studio you have. Also depending upon if you are using 64-bit OS you may need to look
+                    under <i>Program Files (X86)</i> for the above location.
+                </p>
+
+                <h2 id="adding-external-tool">Adding new external tool</h2>
+                <p>
+                    First of all you need to locate the <b>TextTransform.exe</b> as explained above. For my install since I am using Visual Studio
+                    2010 (32-bit) on 64-bit windows the location of <b>TextTransform.exe</b> is following:
+                </p>
+                <p>
+                    <i>C:\Program Files (x86)\Common Files\Microsoft Shared\TextTemplating\10.0\TextTransform.exe</i>
+                </p>
+                <p>
+                    Now we have to do the following steps in order to add a new external tool under Visual Studio Tools menu:
+                </p>
+                <ol>
+                    <li>Copy <b>Fluency</b> folder from Contributions and move it under your Solution folder.</li>
+                    <li>Open Visual Studio and go to <b>Tools -&gt; External Tools</b> menu and click <b>Add</b> button. This will add a blank  external tool.</li>
+                    <li>In Title textbox enter <b>Fluency</b> while in Command textbox enter the full path to <b>TextTransform.exe</b> which in my case is <i>C:\Program Files (x86)\Common Files\Microsoft Shared\TextTemplating\10.0\TextTransform.exe</i></li>
+                    <li>Now place following text in Arguments textbox </li>
+                </ol>
+                <pre class="prettyprint linenums"><code>$(SolutionDir)\Fluency\TableDataGateway.tt -out  $(SolutionDir)/Entities.Generated.cs -a !!ns!MyDomain -a !!cs!Server=YOUR_SERVER_NAME;Database=MyDb;Trusted_Connection=true -a !!csn!MyDb</code></pre>
+                <ul>
+                    <li><code> $(SolutionDir)\Fluency\TableDataGateway.tt </code> is the path to template under your solution folder. </li>
+                    <li><code> -out  $(SolutionDir)/Entities.Generated.cs </code> tells the path and name of generated file in your solution folder.</li>
+                    <li><code> -a !!ns!MyDomain </code> tells the template about namespace for generated code where !!ns is parameter name and !MyDomain tells value which is MyDomain. </li>
+                    <li><code> -a !!cs!Server=YOUR_SERVER_NAME;Database=MyDb;Trusted_Connection=true </code>> tells the database connection string from where template has to generate the code. </li>
+                    <li>Lastly <code> -a !!csn!MyDb </code> tells the name of connection string in web.config which will be used by generated code when opening a database connection. In this case connection string name is MyDb you will replace this with what ever is yours.</li>
+                </ul>
+                <p>
+                    Now click <b>OK</b> button and new external tool will be added to your <b>Tools</b> menu. Finally, open your Solution in Visual Studio
+                    and then go to <b>Tools</b> menu and click on <b>Fluency</b>. It will open a dialogue box - just click on the <b>OK</b> button and it will generate
+                    the code under your solution folder! Now that template is configured, you can always regenerate your code in few clicks.
+                </p>
+
+                <h2 id="understanding-generated-code">Understanding the generated code</h2>
+                <p>
+                    There will be two classes generated for every table in database. First one will be entity class which will contain fields corresponding to
+                    Database table. The second will be Gateway class which will contain common methods for CURD operations. Let's suppose we have a table called
+                    <b>Product</b> in Database with following schema:
+                </p>
+                <pre class="prettyprint linenums"><code>CREATE TABLE [dbo].[Product](
+    [Id] [int] IDENTITY(1,1) NOT NULL,
+    [Name] [nvarchar](256) NOT NULL,
+    [Price] [decimal](18, 2) NOT NULL,
+    [Sku] [nvarchar](256) NULL,
+    [Description] [nvarchar](max) NULL,
+    [ManufacturerId] [int] NULL,
+    [CreatedOn] [datetime] NULL,
+    [ModifiedOn] [datetime] NULL
+    CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED ([Id] ASC))</code></pre>
+
+                <p>The code generated for product table will consist of following two classes:</p>
+                <pre class="prettyprint linenums"><code>/// &lt;summary&gt;
+/// Product entity class
+/// &lt;/summary&gt;
+public partial class Product    
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    public string Sku { get; set; }
+    public string Description { get; set; }
+    public int ManufacturerId { get; set; }
+    public DateTime CreatedOn { get; set; }
+    public DateTime ModifiedOn { get; set; }
+}
+
+/// &lt;summary&gt;
+/// Product gateway class
+/// &lt;/summary&gt;
+public partial class ProductGateway
+{
+    private static IDbContext Context()
+    {
+        return new DbContext().ConnectionStringName("MyDb", new SqlServerProvider());
+    }
+
+    public static Product Select(int id)
+    {
+        using(var context = Context())
+        {
+            return context.Sql("SELECT * FROM Product WHERE Id = @id ")
+                .Parameter("id", id)
+                .QuerySingle&lt;Product&gt;();
+        }
+    }
+
+    public static List&lt;Product&gt; SelectAll()
+    {
+        return SelectAll(string.Empty);
+    }
+
+    public static List&lt;Product&gt; SelectAll(string sortExpression)
+    {
+            return SelectAll(0, 0, sortExpression);
+    }
+
+    public static List&lt;Product&gt; SelectAll(int startRowIndex, int maximumRows, string sortExpression)
+    {
+        using (var context = Context())
+        {
+            var select = context.Select&lt;Product&gt;(" * ")
+                    .From(" Product ");
+
+            if (maximumRows &gt; 0)
+            {
+                if (startRowIndex == 0) 
+                    startRowIndex = 1;
+
+                select.Paging(startRowIndex, maximumRows);
+            }
+
+            if (!string.IsNullOrEmpty(sortExpression))
+                select.OrderBy(sortExpression);
+
+            return select.QueryMany();
+        }
+    }
+
+    public static int CountAll()
+    {
+        using (var context = Context())
+        {
+            return context.Sql(" SELECT COUNT(*) FROM Product ")
+                    .QuerySingle&lt;int&gt;();
+        }
+    }
+
+        
+    public static List&lt;Product&gt; SelectByManufacturer(int manufacturerId)
+    {
+        return SelectByManufacturer(manufacturerId, string.Empty);
+    }
+
+    public static List&lt;Product&gt; SelectByManufacturer(int manufacturerId, string sortExpression)
+    {
+        return SelectByManufacturer(manufacturerId, 0, 0, sortExpression);
+    }
+
+    public static List&lt;Product&gt; SelectByManufacturer(int manufacturerId, int startRowIndex, int maximumRows, string sortExpression)
+    {
+        using (var context = Context())
+        {
+            var select = context.Select&lt;Product&gt;(" * ")
+                .From(" Product ")
+                .Where(" ManufacturerId = @manufacturerid ")
+                .Parameter("manufacturerid", manufacturerId);
+
+            if (maximumRows &gt; 0)
+            {
+                if (startRowIndex == 0) 
+                    startRowIndex = 1;
+
+                select.Paging(startRowIndex, maximumRows);
+            }
+
+            if (!string.IsNullOrEmpty(sortExpression))
+                select.OrderBy(sortExpression);
+
+            return select.QueryMany();
+        }
+    }
+
+    public static int CountByManufacturer(int manufacturerId)
+    {
+        using (var context = Context())
+        {
+            return context.Sql(" SELECT COUNT(*) FROM Product WHERE ManufacturerId = @manufacturerid")
+                .Parameter("manufacturerid", manufacturerId)
+                .QuerySingle&lt;int&gt;();
+        }
+    }
+        
+    public static bool Insert(Product product) 
+    {
+        using (var context = Context())
+        {
+            int id = context.Insert&lt;Product&gt;("Product", product)
+                .AutoMap(x =&gt; x.Id)
+                .ExecuteReturnLastId&lt;int&gt;();
+
+            product.Id = id;
+            return id &gt; 0;
+        }
+    }
+
+    public static bool Update(Product product)
+    {
+        using (var context = Context())
+        {
+            return context.Update&lt;Product&gt;("Product", product)
+                .AutoMap(x =&gt; x.Id)
+                .Execute() &gt; 0;
+        }
+    }
+
+    public static bool Delete(Product product) 
+    {
+        return Delete(product.Id);
+    }
+
+    public static bool Delete(int id)
+    {
+        using (var context = Context())
+        {
+            return context.Sql(" DELETE FROM Product WHERE Id = @id ")
+                .Parameter("id", id)
+                .Execute() &gt; 0;
+        }
+    }
+}</code></pre>
+
+                <h2 id="using-generated-code">Using the generated files</h2>
+                <p>
+                    Here are some examples of using the generated code from above.
+                </p>
+
+                <h5>Select single product by Id</h5>
+                <pre class="prettyprint linenums"><code>Product product = ProductGateway.Select(103); </code></pre>
+
+                <h5>Select all products</h5>
+                <pre class="prettyprint linenums"><code>List&lt;Product&gt; products = ProductGateway.SelectAll();</code></pre>
+
+                <h5>Count all products</h5>
+                <pre class="prettyprint linenums"><code>int count = ProductGateway.CountAll();</code></pre>
+
+                <h5>Select all products with paging</h5>
+                <pre class="prettyprint linenums"><code>// LOAD FIRST 20 PRODUCTS ORDER BY ID
+List&lt;Product&gt; products = ProductGateway.SelectAll(1, 20, "Id ASC");</code></pre>
+
+                <h5>Select all products for manufacturer foreign key</h5>
+                <pre class="prettyprint linenums"><code>// LOAD FIRST 20 PRODUCTS ORDER BY NAME FOR MANUFACTURER ID 91
+List&lt;Product&gt; products = ProductGateway.SelectByManufacturer(91,1, 20, "Name ASC");</code></pre>
+
+                <h5>Insert new product</h5>
+                <pre class="prettyprint linenums"><code>Product product = new Product() { Name = "New Product", Price = 111, Sku = "SKU-111", Description = "None" };
+ProductGateway.Insert(product);
+            
+// IF PRIMARYKEY IS IDENTITY THEN IT WILL BE SET BACK TO THE OBJECT
+Console.Writeline(string.Format("Product Id = {0}", product.Id));</code></pre>
+
+                <h5>Update existing product</h5>
+                <pre class="prettyprint linenums"><code>Product product = ProductGateway.Select(103); 
+product.Price = 200;
+ProductGateway.Update(product);</code></pre>
+
+                <h5>Delete existing product</h5>
+                <pre class="prettyprint linenums"><code>Product product = ProductGateway.Select(103); 
+ProductGateway.Delete(product);</code></pre>
+            </main>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            window.prettyPrint && prettyPrint();
+        })
+    </script>
+</body>
+</html>
