@@ -1,6 +1,6 @@
 body
 {
-    font-size: .875rem;
+    font-size: 0.875rem;
 }
 
 /*
@@ -16,6 +16,12 @@ body
     z-index: 100; /* Behind the navbar */
     padding: 48px 0 0; /* Height of navbar */
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar,
+.navbar-brand
+{
+    width: 300px;
 }
 
 .sidebar-sticky
@@ -70,22 +76,31 @@ body
  * Content
  */
 
-[role="main"]
+.main-content
 {
     padding-top: 65px; /* Space for fixed navbar */
+    max-width: 1100px;
 }
 
-/*
+@media (min-width: 768px)
+{
+    .main-content
+    {
+        margin-left: 300px;
+    }
+}
+
+
+    /*
  * Navbar
  */
-
-.navbar-brand
-{
-    padding-top: .75rem;
-    padding-bottom: .75rem;
-    font-size: 1rem;
-    background-color: rgba(0, 0, 0, .25);
-}
+    .navbar-brand
+    {
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+        font-size: 1rem;
+        background-color: rgba(0, 0, 0, 0.25);
+    }
 
 .navbar .form-control
 {
@@ -119,4 +134,13 @@ body
 .border-bottom
 {
     border-bottom: 1px solid #e5e5e5;
+}
+
+
+.section-title
+{
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 0.5rem;
+    margin: 2rem 0 1rem;
+    color: #800;
 }

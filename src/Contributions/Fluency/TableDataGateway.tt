@@ -2,9 +2,8 @@
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#
- string ns = Host.ResolveParameterValue(null, null, "ns");
- string connectionString = Host.ResolveParameterValue(null, null, "cs");
- string connectionStringName = Host.ResolveParameterValue(null, null, "csn");
+ string ns = "PROJECT_NAMESPACE";
+ string connectionStringName = "CONNECTION_STRING_NAME";
 #>
 namespace <#=ns#>
 {
@@ -34,7 +33,7 @@ namespace <#=ns#>
 	};
 
 	System.Data.DataSet ds = new DataSet();
-	SqlConnection conn = new SqlConnection(connectionString);
+	SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString);
 	try
 	{
 	conn.Open();
